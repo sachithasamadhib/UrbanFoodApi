@@ -59,7 +59,7 @@ public class ChatbotService {
         }
 
         // Default response if no keyword matches
-        return "I don't have information about that. Please ask about our hours, menu, location, delivery, reservations, specials, dietary options, or contact information.";
+        return "I don't have information about that.";
     }
 }
 
