@@ -4,10 +4,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class WishlistApplication {
+public class Wishlist {
 
 	public static void main(String[] args) {
-		SpringApplication.run(WishlistApplication.class, args);
+		SpringApplication.run(Wishlist.class, args);
 	}
 
 }
