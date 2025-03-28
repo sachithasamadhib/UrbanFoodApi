@@ -17,6 +17,7 @@
   <modules>
     <module>Wishlist</module>
     <module>Search</module>
+      <module>Help_Chatbot</module>
   </modules>
 
   <build>
