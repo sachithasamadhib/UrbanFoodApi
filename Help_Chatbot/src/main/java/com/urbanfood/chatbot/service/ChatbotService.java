@@ -39,6 +39,9 @@ public class ChatbotService {
         
         knowledgeBase.put("contact", 
             "You can contact us at info@urbanfood.com or call us at (555) 123-4567.");
+
+        knowledgeBase.put("hi",
+            "Welcome to the UrbanFood! How can I help you?.");
     }
 
     public String processQuery(String query) {
