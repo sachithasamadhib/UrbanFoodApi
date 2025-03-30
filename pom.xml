@@ -19,6 +19,7 @@
     <module>Search</module>
     <module>Help_Chatbot</module>
     <module>Product_availability</module>
+      <module>Email_service</module>
 
   </modules>
 

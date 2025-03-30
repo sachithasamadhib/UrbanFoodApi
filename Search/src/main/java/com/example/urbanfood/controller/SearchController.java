@@ -3,7 +3,6 @@ package com.example.urbanfood.controller;
 import com.example.urbanfood.model.Search;
 import com.example.urbanfood.service.SearchService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,10 +15,14 @@ public class SearchController {
     @Autowired
     private SearchService searchService;
 
+
+//    @GetMapping("/search")
+//    public List<Search> searchProducts(@RequestParam("searchText") String searchText) {
+//        return searchService.searchProducts(searchText);
+//    }
+
     @GetMapping("/search/{searchText}")
-    public ResponseEntity<List<Search>> searchProducts(@PathVariable String searchText) {
-        List<Search> products = searchService.searchProducts(searchText);
-        return ResponseEntity.ok(products);
+    public List<Search> searchProductsByPath(@PathVariable("searchText") String searchText) {
+        return searchService.searchProducts(searchText);
     }
 }
-
