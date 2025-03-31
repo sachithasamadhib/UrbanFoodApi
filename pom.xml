@@ -20,8 +20,7 @@
     <module>Help_Chatbot</module>
     <module>Product_availability</module>
     <module>email-service</module>
-    <module>email-service</module>
-      <module>cart-service</module>
+    <module>cart-service</module>
 
   </modules>
 
