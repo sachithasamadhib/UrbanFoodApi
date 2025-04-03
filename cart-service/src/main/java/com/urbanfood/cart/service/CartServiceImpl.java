@@ -45,7 +45,7 @@ public class CartServiceImpl implements CartService {
     @Transactional
     public CartDTO addItemToCart(Long userId, CartRequestDTO request) {
         try {
-            // Call Oracle stored procedure
+            // Call Oracle stored procedure with @Modifying annotation
             cartRepository.callAddToCartProcedure(
                     userId,
                     request.getProductId(),
@@ -134,7 +134,7 @@ public class CartServiceImpl implements CartService {
         dto.setAddedDate(cartItem.getAddedDate());
         dto.setSubtotal(dto.calculateSubtotal());
 
-        // In a real application, you would call the product service to get the product name
+
         dto.setProductName("Product " + cartItem.getProductId());
 
         return dto;

@@ -2,6 +2,7 @@ package com.urbanfood.cart.repository;
 
 import com.urbanfood.cart.model.Cart;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
@@ -16,6 +17,7 @@ public interface CartRepository extends JpaRepository<Cart, Long> {
     @Query(value = "SELECT CART_ID_SEQ.NEXTVAL FROM DUAL", nativeQuery = true)
     Long getNextCartId();
 
+    @Modifying
     @Query(value = "BEGIN add_to_cart(:userId, :productId, :quantity, :price); END;", nativeQuery = true)
     void callAddToCartProcedure(
             @Param("userId") Long userId,
@@ -23,17 +25,20 @@ public interface CartRepository extends JpaRepository<Cart, Long> {
             @Param("quantity") Integer quantity,
             @Param("price") BigDecimal price);
 
+    @Modifying
     @Query(value = "BEGIN remove_from_cart(:userId, :productId); END;", nativeQuery = true)
     void callRemoveFromCartProcedure(
             @Param("userId") Long userId,
             @Param("productId") Long productId);
 
+    @Modifying
     @Query(value = "BEGIN update_cart_quantity(:userId, :productId, :quantity); END;", nativeQuery = true)
     void callUpdateCartQuantityProcedure(
             @Param("userId") Long userId,
             @Param("productId") Long productId,
             @Param("quantity") Integer quantity);
 
+    @Modifying
     @Query(value = "BEGIN clear_cart(:userId); END;", nativeQuery = true)
     void callClearCartProcedure(@Param("userId") Long userId);
 }
