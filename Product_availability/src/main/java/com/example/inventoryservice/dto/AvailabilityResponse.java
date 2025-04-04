@@ -1,5 +1,6 @@
 package com.example.inventoryservice.dto;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -7,12 +8,11 @@ import lombok.NoArgsConstructor;
 @Data
 @Builder
 @NoArgsConstructor
+@AllArgsConstructor
 public class AvailabilityResponse {
-    private String status;
+    private Long productId;
+    private String productName;
+    private Integer requiredAmount;
+    private boolean available;
     private Integer availableQuantity;
-
-    public AvailabilityResponse(String status, Integer availableQuantity) {
-        this.status = status;
-        this.availableQuantity = availableQuantity;
-    }
 }

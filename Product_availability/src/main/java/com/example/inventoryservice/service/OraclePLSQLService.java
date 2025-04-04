@@ -17,33 +17,27 @@ import java.util.Map;
 public class OraclePLSQLService {
 
     private final JdbcTemplate jdbcTemplate;
-    private SimpleJdbcCall checkAvailabilityProcedure;
+    private SimpleJdbcCall checkAvailabilityCall;
 
     @Autowired
-    public OraclePLSQLService(JdbcTemplate jdbcTemplate, DataSource dataSource) {
-        this.jdbcTemplate = jdbcTemplate;
-        
-        // Initialize the SimpleJdbcCall for the stored procedure
-        this.checkAvailabilityProcedure = new SimpleJdbcCall(dataSource)
-                .withProcedureName("CHECK_PRODUCT_AVAILABILITY")
-                .withCatalogName("INVENTORY_PKG")
+    public OraclePLSQLService(DataSource dataSource) {
+        this.jdbcTemplate = new JdbcTemplate(dataSource);
+        this.checkAvailabilityCall = new SimpleJdbcCall(jdbcTemplate)
+                .withProcedureName("check_product_availability")
+                .withoutProcedureColumnMetaDataAccess()
                 .declareParameters(
                         new SqlParameter("p_product_id", Types.NUMERIC),
                         new SqlParameter("p_required_amount", Types.NUMERIC),
-                        new SqlOutParameter("p_is_available", Types.NUMERIC)
+                        new SqlOutParameter("p_is_available", Types.NUMERIC),
+                        new SqlOutParameter("p_available_quantity", Types.NUMERIC)
                 );
     }
 
-    public boolean checkProductAvailabilityPLSQL(Long productId, Integer requiredAmount) {
+    public Map<String, Object> checkProductAvailability(Long productId, Integer requiredAmount) {
         SqlParameterSource parameterSource = new MapSqlParameterSource()
                 .addValue("p_product_id", productId)
                 .addValue("p_required_amount", requiredAmount);
-        
-        Map<String, Object> result = checkAvailabilityProcedure.execute(parameterSource);
-        
-        // The stored procedure returns 1 for available, 0 for unavailable
-        Integer isAvailable = (Integer) result.get("p_is_available");
-        return isAvailable != null && isAvailable == 1;
+
+        return checkAvailabilityCall.execute(parameterSource);
     }
 }
-

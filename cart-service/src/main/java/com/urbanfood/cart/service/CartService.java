@@ -1,12 +1,12 @@
 package com.urbanfood.cart.service;
 
-import com.urbanfood.cart.dto.CartDTO;
 import com.urbanfood.cart.dto.CartRequestDTO;
+import com.urbanfood.cart.dto.CartResponseDTO;
 
 public interface CartService {
-    CartDTO getCartByUserId(Long userId);
-    CartDTO addItemToCart(Long userId, CartRequestDTO request);
-    CartDTO updateCartItem(Long userId, Long productId, CartRequestDTO request);
-    CartDTO removeItemFromCart(Long userId, Long productId);
-    void clearCart(Long userId);
+    CartResponseDTO getCartByUserId(Long userId);
+    CartResponseDTO addItemToCart(Long userId, CartRequestDTO request);
+    CartResponseDTO updateCartItem(Long userId, Long productId, CartRequestDTO request);
+    CartResponseDTO removeItemFromCart(Long userId, Long productId);
+    CartResponseDTO clearCart(Long userId);
 }

@@ -1,7 +1,7 @@
 package com.urbanfood.cart.controller;
 
-import com.urbanfood.cart.dto.CartDTO;
 import com.urbanfood.cart.dto.CartRequestDTO;
+import com.urbanfood.cart.dto.CartResponseDTO;
 import com.urbanfood.cart.service.CartService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -18,39 +18,59 @@ public class CartController {
     private final CartService cartService;
 
     @GetMapping("/{userId}")
-    public ResponseEntity<CartDTO> getCart(@PathVariable Long userId) {
-        CartDTO cart = cartService.getCartByUserId(userId);
-        return ResponseEntity.ok(cart);
+    public ResponseEntity<CartResponseDTO> getCart(@PathVariable Long userId) {
+        CartResponseDTO response = cartService.getCartByUserId(userId);
+        return ResponseEntity.ok(response);
     }
 
     @PostMapping("/{userId}/items")
-    public ResponseEntity<CartDTO> addItemToCart(
+    public ResponseEntity<CartResponseDTO> addItemToCart(
             @PathVariable Long userId,
             @Valid @RequestBody CartRequestDTO request) {
-        CartDTO updatedCart = cartService.addItemToCart(userId, request);
-        return new ResponseEntity<>(updatedCart, HttpStatus.CREATED);
+        CartResponseDTO response = cartService.addItemToCart(userId, request);
+
+        if (response.isSuccess()) {
+            return new ResponseEntity<>(response, HttpStatus.CREATED);
+        } else {
+            return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+        }
     }
 
     @PutMapping("/{userId}/items/{productId}")
-    public ResponseEntity<CartDTO> updateCartItem(
+    public ResponseEntity<CartResponseDTO> updateCartItem(
             @PathVariable Long userId,
             @PathVariable Long productId,
             @Valid @RequestBody CartRequestDTO request) {
-        CartDTO updatedCart = cartService.updateCartItem(userId, productId, request);
-        return ResponseEntity.ok(updatedCart);
+        CartResponseDTO response = cartService.updateCartItem(userId, productId, request);
+
+        if (response.isSuccess()) {
+            return ResponseEntity.ok(response);
+        } else {
+            return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+        }
     }
 
     @DeleteMapping("/{userId}/items/{productId}")
-    public ResponseEntity<CartDTO> removeItemFromCart(
+    public ResponseEntity<CartResponseDTO> removeItemFromCart(
             @PathVariable Long userId,
             @PathVariable Long productId) {
-        CartDTO updatedCart = cartService.removeItemFromCart(userId, productId);
-        return ResponseEntity.ok(updatedCart);
+        CartResponseDTO response = cartService.removeItemFromCart(userId, productId);
+
+        if (response.isSuccess()) {
+            return ResponseEntity.ok(response);
+        } else {
+            return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+        }
     }
 
     @DeleteMapping("/{userId}")
-    public ResponseEntity<Void> clearCart(@PathVariable Long userId) {
-        cartService.clearCart(userId);
-        return ResponseEntity.noContent().build();
+    public ResponseEntity<CartResponseDTO> clearCart(@PathVariable Long userId) {
+        CartResponseDTO response = cartService.clearCart(userId);
+
+        if (response.isSuccess()) {
+            return ResponseEntity.ok(response);
+        } else {
+            return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+        }
     }
 }

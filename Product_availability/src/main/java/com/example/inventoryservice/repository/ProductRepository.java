@@ -6,6 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ProductRepository extends JpaRepository<Product, Long> {
-    // No custom methods needed as we're using the stored procedure
+    // Basic CRUD operations are provided by JpaRepository
 }
-

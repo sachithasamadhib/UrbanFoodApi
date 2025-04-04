@@ -16,7 +16,8 @@ public class ChatbotService {
 
     private void initializeKnowledgeBase() {
         // Add key phrases and responses related to the urban food website
-        knowledgeBase.put("hours", 
+        //for future development we can use hashmap
+        knowledgeBase.put("hours",
             "Our restaurant is open from 10 AM to 10 PM, Monday through Sunday.");
         
         knowledgeBase.put("menu", 
@@ -29,7 +30,7 @@ public class ChatbotService {
             "Yes, we offer both delivery and takeout options.");
         
         knowledgeBase.put("reservation", 
-            "Reservations can be made through our website or by calling us at (555) 123-4567.");
+            "Reservations can be made through our website or by calling us at (94) 123-4567.");
         
         knowledgeBase.put("special", 
             "We have daily specials and a happy hour from 4 PM to 6 PM.");
@@ -38,7 +39,7 @@ public class ChatbotService {
             "We offer various vegan, vegetarian, and gluten-free options.");
         
         knowledgeBase.put("contact", 
-            "You can contact us at info@urbanfood.com or call us at (555) 123-4567.");
+            "You can contact us at info@urbanfood.com or call us at (94) 123-4567.");
 
         knowledgeBase.put("hi",
             "Welcome to the UrbanFood! How can I help you?.");

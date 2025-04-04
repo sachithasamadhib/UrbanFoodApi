@@ -7,55 +7,39 @@ import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
 import java.math.BigDecimal;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "PRODUCTS")
+@Table(name = "products")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class Product {
-    
     @Id
-    @Column(name = "PRODUCTID")
-    private Long productId;
-    
-    @Column(name = "NAME")
-    private String name;
-    
-    @Column(name = "DESCRIPTION")
-    private String description;
-    
-    @Column(name = "BRAND")
-    private String brand;
-    
-    @Column(name = "PRICE")
-    private BigDecimal price;
-    
-    @Column(name = "AMOUNT")
-    private Integer amount;
-    
-    @Column(name = "EXPIRYDATE")
-    private LocalDate expiryDate;
-    
-    @Column(name = "MADEDATE")
-    private LocalDate madeDate;
-    
-    @Column(name = "MAINIMAGENAME")
-    private String mainImageName;
-    
-    @Column(name = "SHIPPINGCOST")
-    private BigDecimal shippingCost;
-    
-    @Column(name = "STATUS")
-    private String status;
-    
-    @Column(name = "TAGS")
-    private String tags;
-    
-    @Column(name = "WEIGHT")
-    private Double weight;
-}
+    @Column(name = "product_id")
+    private Long id;
 
+    @Column(nullable = false)
+    private String name;
+
+    private String description;
+
+    @Column(nullable = false)
+    private BigDecimal price;
+
+    private String category;
+
+    private String brand;
+
+    @Column(name = "stock_quantity")
+    private Integer stockQuantity;
+
+    private String status;
+
+    @Column(name = "created_date")
+    private LocalDateTime createdDate;
+
+    @Column(name = "updated_date")
+    private LocalDateTime updatedDate;
+}
