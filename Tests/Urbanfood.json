@@ -89,147 +89,497 @@
 			"response": []
 		},
 		{
-			"name": "CreateWishlist",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"userId\" : \"1\",\r\n    \"productId\" : \"42\",\r\n    \"productName\" : \"iku\"\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
+			"name": "Wishlist",
+			"item": [
+				{
+					"name": "CreateWishlist",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userId\" : \"1\",\r\n    \"productId\" : \"42\",\r\n    \"productName\" : \"iku\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8083/api/wishlist",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8083",
+							"path": [
+								"api",
+								"wishlist"
+							]
 						}
-					}
+					},
+					"response": []
 				},
-				"url": {
-					"raw": "http://localhost:8083/api/wishlist",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8083",
-					"path": [
-						"api",
-						"wishlist"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "GetallWishlist",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:8083/api/wishlist",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8083",
-					"path": [
-						"api",
-						"wishlist"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "GetWishlistbyID",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:8083/api/wishlist/67ea1122a0c670498edb5f2d",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8083",
-					"path": [
-						"api",
-						"wishlist",
-						"67ea1122a0c670498edb5f2d"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "GetWishlistByUserId",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:8083/api/wishlist/user/1",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8083",
-					"path": [
-						"api",
-						"wishlist",
-						"user",
-						"1"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "UpdateWishlist",
-			"request": {
-				"method": "PUT",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"userId\" : \"1\",\r\n    \"productId\" : \"42h\",\r\n    \"productName\" : \"iku\"\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
+				{
+					"name": "GetallWishlist",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8083/api/wishlist",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8083",
+							"path": [
+								"api",
+								"wishlist"
+							]
 						}
-					}
+					},
+					"response": []
 				},
-				"url": {
-					"raw": "http://localhost:8083/api/wishlist/67e90d4831b1e40511287a0b",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8083",
-					"path": [
-						"api",
-						"wishlist",
-						"67e90d4831b1e40511287a0b"
-					]
+				{
+					"name": "GetWishlistbyID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8083/api/wishlist/67ea1122a0c670498edb5f2d",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8083",
+							"path": [
+								"api",
+								"wishlist",
+								"67ea1122a0c670498edb5f2d"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetWishlistByUserId",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8083/api/wishlist/user/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8083",
+							"path": [
+								"api",
+								"wishlist",
+								"user",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UpdateWishlist",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userId\" : \"1\",\r\n    \"productId\" : \"42h\",\r\n    \"productName\" : \"iku\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8083/api/wishlist/67e90d4831b1e40511287a0b",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8083",
+							"path": [
+								"api",
+								"wishlist",
+								"67e90d4831b1e40511287a0b"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteWishlist",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8083/api/wishlist/67e90d4831b1e40511287a0b",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8083",
+							"path": [
+								"api",
+								"wishlist",
+								"67e90d4831b1e40511287a0b"
+							]
+						}
+					},
+					"response": []
 				}
-			},
-			"response": []
+			]
 		},
 		{
-			"name": "DeleteWishlist",
-			"request": {
-				"method": "DELETE",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:8083/api/wishlist/67e90d4831b1e40511287a0b",
-					"protocol": "http",
-					"host": [
-						"localhost"
+			"name": "Cart",
+			"item": [
+				{
+					"name": "Get Cart",
+					"item": [
+						{
+							"name": "Get User Cart",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:8082/api/cart/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8082",
+									"path": [
+										"api",
+										"cart",
+										"1"
+									]
+								},
+								"description": "Get cart for a specific user ID. Replace '1' with the desired user ID."
+							},
+							"response": []
+						},
+						{
+							"name": "Get Cart with Old Items",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:8082/api/cart/4",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8082",
+									"path": [
+										"api",
+										"cart",
+										"4"
+									]
+								},
+								"description": "Get cart for user ID 4 (Sarah Johnson) - Contains items older than 10 days"
+							},
+							"response": []
+						}
 					],
-					"port": "8083",
-					"path": [
-						"api",
-						"wishlist",
-						"67e90d4831b1e40511287a0b"
-					]
+					"description": "Requests for retrieving cart information"
+				},
+				{
+					"name": "Add to Cart",
+					"item": [
+						{
+							"name": "Add Item to Cart",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"productId\": 101,\n    \"quantity\": 3,\n    \"price\": 4.99\n}"
+								},
+								"url": {
+									"raw": "http://localhost:8082/api/cart/1/items",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8082",
+									"path": [
+										"api",
+										"cart",
+										"1",
+										"items"
+									]
+								},
+								"description": "Add an item to a user's cart. Replace user ID and product details as needed."
+							},
+							"response": []
+						},
+						{
+							"name": "Add Invalid Product (Error Test)",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"productId\": 999,\n    \"quantity\": 1,\n    \"price\": 9.99\n}"
+								},
+								"url": {
+									"raw": "http://localhost:8082/api/cart/1/items",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8082",
+									"path": [
+										"api",
+										"cart",
+										"1",
+										"items"
+									]
+								},
+								"description": "Test error handling with invalid product ID"
+							},
+							"response": []
+						}
+					],
+					"description": "Requests for adding items to carts"
+				},
+				{
+					"name": "Update Cart Items",
+					"item": [
+						{
+							"name": "Update Cart Item Quantity",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"productId\": 101,\n    \"quantity\": 5,\n    \"price\": 4.99\n}"
+								},
+								"url": {
+									"raw": "http://localhost:8082/api/cart/1/items/101",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8082",
+									"path": [
+										"api",
+										"cart",
+										"1",
+										"items",
+										"101"
+									]
+								},
+								"description": "Update quantity of an item in the cart. Replace user ID, product ID, and details as needed."
+							},
+							"response": []
+						},
+						{
+							"name": "Set Quantity to Zero (Remove Item)",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"productId\": 110,\n    \"quantity\": 0,\n    \"price\": 3.99\n}"
+								},
+								"url": {
+									"raw": "http://localhost:8082/api/cart/3/items/110",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8082",
+									"path": [
+										"api",
+										"cart",
+										"3",
+										"items",
+										"110"
+									]
+								},
+								"description": "Set quantity to 0 to remove an item from the cart"
+							},
+							"response": []
+						}
+					],
+					"description": "Requests for updating cart item quantities"
+				},
+				{
+					"name": "Remove from Cart",
+					"item": [
+						{
+							"name": "Remove Item from Cart",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:8082/api/cart/1/items/103",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8082",
+									"path": [
+										"api",
+										"cart",
+										"1",
+										"items",
+										"103"
+									]
+								},
+								"description": "Remove an item from the cart. Replace user ID and product ID as needed."
+							},
+							"response": []
+						}
+					],
+					"description": "Requests for removing items from carts"
+				},
+				{
+					"name": "Clear Cart",
+					"item": [
+						{
+							"name": "Clear User's Cart",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:8082/api/cart/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8082",
+									"path": [
+										"api",
+										"cart",
+										"1"
+									]
+								},
+								"description": "Clear all items from a user's cart. Replace user ID as needed."
+							},
+							"response": []
+						}
+					],
+					"description": "Requests for clearing all items from carts"
+				},
+				{
+					"name": "Test Auto-Deletion",
+					"item": [
+						{
+							"name": "Check Cart After Cleanup",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:8082/api/cart/4",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8082",
+									"path": [
+										"api",
+										"cart",
+										"4"
+									]
+								},
+								"description": "Check cart after running the cleanup procedure (should be empty if items were older than 10 days)"
+							},
+							"response": []
+						}
+					],
+					"description": "Requests for testing the auto-deletion of old cart items"
 				}
-			},
-			"response": []
+			],
+			"description": "Cart microservice endpoints for managing shopping carts"
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://localhost:8082",
+			"type": "string"
 		}
 	]
 }
