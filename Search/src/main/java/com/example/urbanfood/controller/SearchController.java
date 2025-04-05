@@ -15,12 +15,6 @@ public class SearchController {
     @Autowired
     private SearchService searchService;
 
-
-//    @GetMapping("/search")
-//    public List<Search> searchProducts(@RequestParam("searchText") String searchText) {
-//        return searchService.searchProducts(searchText);
-//    }
-
     @GetMapping("/search/{searchText}")
     public List<Search> searchProductsByPath(@PathVariable("searchText") String searchText) {
         return searchService.searchProducts(searchText);

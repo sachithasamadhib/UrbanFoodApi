@@ -27,19 +27,7 @@ public class SearchService {
                 .withProcedureName("search_products")
                 .returningResultSet("PRODUCTCURSOR", (rs, rowNum) -> {
                     Search product = new Search();
-                    product.setProductId(rs.getLong("PRODUCTID"));
                     product.setName(rs.getString("NAME"));
-                    product.setWeight(rs.getBigDecimal("WEIGHT"));
-                    product.setStatus(rs.getString("STATUS"));
-                    product.setAmount(rs.getInt("AMOUNT"));
-                    product.setDescription(rs.getString("DESCRIPTION"));
-                    product.setExpiryDate(rs.getDate("EXPIRYDATE"));
-                    product.setBrand(rs.getString("BRAND"));
-                    product.setMadeDate(rs.getDate("MADEDATE"));
-                    product.setPrice(rs.getBigDecimal("PRICE"));
-                    product.setTags(rs.getString("TAGS"));
-                    product.setMainImageName(rs.getString("MAINIMAGENAME"));
-                    product.setShippingCost(rs.getBigDecimal("SHIPPINGCOST"));
                     return product;
                 });
     }

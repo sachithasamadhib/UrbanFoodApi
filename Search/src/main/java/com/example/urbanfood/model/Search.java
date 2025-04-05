@@ -26,46 +26,9 @@ public class Search {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "product_seq_gen")
     @SequenceGenerator(name = "product_seq_gen", sequenceName = "PRODUCT_SEQ", allocationSize = 1)
-    @Column(name = "PRODUCTID")
-    private Long productId;
     
-    @Column(name = "NAME", nullable = false, length = 100)
+    @Column(name = "ProductName")
     private String name;
-    
-    @Column(name = "WEIGHT", precision = 10, scale = 2)
-    private BigDecimal weight;
-    
-    @Column(name = "STATUS", length = 20)
-    private String status;
-    
-    @Column(name = "AMOUNT")
-    private Integer amount;
-    
-    @Column(name = "DESCRIPTION", length = 4000)
-    private String description;
-    
-    @Temporal(TemporalType.DATE)
-    @Column(name = "EXPIRYDATE")
-    private Date expiryDate;
-    
-    @Column(name = "BRAND", length = 100)
-    private String brand;
-    
-    @Temporal(TemporalType.DATE)
-    @Column(name = "MADEDATE")
-    private Date madeDate;
-    
-    @Column(name = "PRICE", nullable = false, precision = 10, scale = 2)
-    private BigDecimal price;
-    
-    @Column(name = "TAGS", length = 500)
-    private String tags;
-    
-    @Column(name = "MAINIMAGENAME", length = 255)
-    private String mainImageName;
-    
-    @Column(name = "SHIPPINGCOST", precision = 10, scale = 2)
-    private BigDecimal shippingCost;
 
 }
 

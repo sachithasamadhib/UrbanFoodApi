@@ -17,29 +17,23 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class Product {
     @Id
-    @Column(name = "product_id")
+    @Column(name = "ProductID ")
     private Long id;
 
     @Column(nullable = false)
-    private String name;
+    private String ProductName ;
 
     private String description;
 
     @Column(nullable = false)
     private BigDecimal price;
 
-    private String category;
 
     private String brand;
 
-    @Column(name = "stock_quantity")
+    @Column(name = "Amount")
     private Integer stockQuantity;
 
     private String status;
 
-    @Column(name = "created_date")
-    private LocalDateTime createdDate;
-
-    @Column(name = "updated_date")
-    private LocalDateTime updatedDate;
 }

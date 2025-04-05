@@ -47,7 +47,7 @@ public class ProductService {
                 .availableQuantity(availableQuantity);
 
         // Add product name if product exists
-        productOpt.ifPresent(product -> responseBuilder.productName(product.getName()));
+        productOpt.ifPresent(product -> responseBuilder.productName(product.getProductName()));
 
         return responseBuilder.build();
     }
