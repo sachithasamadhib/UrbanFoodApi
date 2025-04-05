@@ -38,9 +38,22 @@ public class EmailServiceImpl implements EmailService {
     private String senderName;
 
     @Override
+    @Transactional
     public void sendEmail(EmailNotification notification) {
         try {
+            // Save notification to database if it's a new one
+            if (notification.getId() == null) {
+                notification.setId(emailNotificationRepository.getNextNotificationId());
+                notification.setProcessed(0);
+                if (notification.getCreatedDate() == null) {
+                    notification.setCreatedDate(LocalDateTime.now());
+                }
+                emailNotificationRepository.save(notification);
+                log.info("Saved new notification with ID: {}", notification.getId());
+            }
+
             String htmlContent = generateEmailContent(notification);
+            log.debug("Generated HTML content for email");
 
             MailjetRequest request = new MailjetRequest(Emailv31.resource)
                     .property(Emailv31.MESSAGES, new JSONArray()
@@ -55,6 +68,7 @@ public class EmailServiceImpl implements EmailService {
                                     .put(Emailv31.Message.SUBJECT, notification.getSubject())
                                     .put(Emailv31.Message.HTMLPART, htmlContent)));
 
+            log.info("Sending email to: {}", notification.getEmail());
             MailjetResponse response = mailjetClient.post(request);
 
             if (response.getStatus() == 200) {
@@ -84,6 +98,7 @@ public class EmailServiceImpl implements EmailService {
     @Transactional
     private void markNotificationAsProcessed(Long id) {
         emailNotificationRepository.markAsProcessed(id, LocalDateTime.now());
+        log.info("Marked notification {} as processed", id);
     }
 
     private String generateEmailContent(EmailNotification notification) {
@@ -96,11 +111,20 @@ public class EmailServiceImpl implements EmailService {
 
         context.setVariables(variables);
 
-        String template = "cart-item-expired";
-        if (!"CART_ITEM_EXPIRED".equals(notification.getNotificationType())) {
-            template = "generic-notification"; // Fallback template
+        String template;
+        switch (notification.getNotificationType()) {
+            case "CART_ITEM_EXPIRED":
+                template = "cart-item-expired";
+                break;
+            case "CART_ITEM_REMOVED":
+                template = "cart-item-removed";
+                break;
+            default:
+                template = "generic-notification";
+                break;
         }
 
+        log.debug("Using template: {} for notification type: {}", template, notification.getNotificationType());
         return templateEngine.process(template, context);
     }
 }

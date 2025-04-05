@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.urbanfood.review.dto.ApiResponse;
 import com.urbanfood.review.dto.ReviewRequest;
 import com.urbanfood.review.dto.ReviewResponse;
 import com.urbanfood.review.dto.ReviewSummary;
@@ -34,19 +35,23 @@ public class ReviewController {
     private ReviewService reviewService;
 
     @PostMapping
-    public ResponseEntity<ReviewResponse> createReview(@Valid @RequestBody ReviewRequest reviewRequest) {
+    public ResponseEntity<ApiResponse<ReviewResponse>> createReview(@Valid @RequestBody ReviewRequest reviewRequest) {
         ReviewResponse createdReview = reviewService.createReview(reviewRequest);
-        return new ResponseEntity<>(createdReview, HttpStatus.CREATED);
+        ApiResponse<ReviewResponse> response = ApiResponse.success(
+                "Review created successfully", createdReview);
+        return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<ReviewResponse> getReviewById(@PathVariable String id) {
+    public ResponseEntity<ApiResponse<ReviewResponse>> getReviewById(@PathVariable String id) {
         ReviewResponse review = reviewService.getReviewById(id);
-        return ResponseEntity.ok(review);
+        ApiResponse<ReviewResponse> response = ApiResponse.success(
+                "Review retrieved successfully", review);
+        return ResponseEntity.ok(response);
     }
 
     @GetMapping("/product/{productId}")
-    public ResponseEntity<Page<ReviewResponse>> getReviewsByProductId(
+    public ResponseEntity<ApiResponse<Page<ReviewResponse>>> getReviewsByProductId(
             @PathVariable String productId,
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size,
@@ -56,65 +61,84 @@ public class ReviewController {
         Sort.Direction direction = sortDirection.equalsIgnoreCase("ASC") ? Sort.Direction.ASC : Sort.Direction.DESC;
         Pageable pageable = PageRequest.of(page, size, Sort.by(direction, sortBy));
         Page<ReviewResponse> reviews = reviewService.getReviewsByProductId(productId, pageable);
-        return ResponseEntity.ok(reviews);
+
+        ApiResponse<Page<ReviewResponse>> response = ApiResponse.success(
+                "Reviews retrieved successfully", reviews);
+        return ResponseEntity.ok(response);
     }
 
     @GetMapping("/user/{userId}")
-    public ResponseEntity<Page<ReviewResponse>> getReviewsByUserId(
+    public ResponseEntity<ApiResponse<Page<ReviewResponse>>> getReviewsByUserId(
             @PathVariable String userId,
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size) {
 
         Pageable pageable = PageRequest.of(page, size);
         Page<ReviewResponse> reviews = reviewService.getReviewsByUserId(userId, pageable);
-        return ResponseEntity.ok(reviews);
+
+        ApiResponse<Page<ReviewResponse>> response = ApiResponse.success(
+                "User reviews retrieved successfully", reviews);
+        return ResponseEntity.ok(response);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<ReviewResponse> updateReview(
+    public ResponseEntity<ApiResponse<ReviewResponse>> updateReview(
             @PathVariable String id,
             @Valid @RequestBody ReviewRequest reviewRequest) {
 
         ReviewResponse updatedReview = reviewService.updateReview(id, reviewRequest);
-        return ResponseEntity.ok(updatedReview);
+        ApiResponse<ReviewResponse> response = ApiResponse.success(
+                "Review updated successfully", updatedReview);
+        return ResponseEntity.ok(response);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteReview(@PathVariable String id) {
+    public ResponseEntity<ApiResponse<Void>> deleteReview(@PathVariable String id) {
         reviewService.deleteReview(id);
-        return ResponseEntity.noContent().build();
+        ApiResponse<Void> response = ApiResponse.success(
+                "Review deleted successfully", null);
+        return ResponseEntity.ok(response);
     }
 
     @PostMapping("/{id}/helpful")
-    public ResponseEntity<ReviewResponse> markReviewAsHelpful(@PathVariable String id) {
+    public ResponseEntity<ApiResponse<ReviewResponse>> markReviewAsHelpful(@PathVariable String id) {
         ReviewResponse updatedReview = reviewService.voteHelpful(id);
-        return ResponseEntity.ok(updatedReview);
+        ApiResponse<ReviewResponse> response = ApiResponse.success(
+                "Review marked as helpful", updatedReview);
+        return ResponseEntity.ok(response);
     }
 
     @GetMapping("/product/{productId}/summary")
-    public ResponseEntity<ReviewSummary> getReviewSummaryByProductId(@PathVariable String productId) {
+    public ResponseEntity<ApiResponse<ReviewSummary>> getReviewSummaryByProductId(@PathVariable String productId) {
         ReviewSummary summary = reviewService.getReviewSummaryByProductId(productId);
-        return ResponseEntity.ok(summary);
+        ApiResponse<ReviewSummary> response = ApiResponse.success(
+                "Review summary retrieved successfully", summary);
+        return ResponseEntity.ok(response);
     }
 
     @GetMapping("/product/{productId}/helpful")
-    public ResponseEntity<List<ReviewResponse>> getMostHelpfulReviews(
+    public ResponseEntity<ApiResponse<List<ReviewResponse>>> getMostHelpfulReviews(
             @PathVariable String productId,
             @RequestParam(defaultValue = "5") int limit) {
 
         List<ReviewResponse> helpfulReviews = reviewService.getMostHelpfulReviews(productId, limit);
-        return ResponseEntity.ok(helpfulReviews);
+        ApiResponse<List<ReviewResponse>> response = ApiResponse.success(
+                "Most helpful reviews retrieved successfully", helpfulReviews);
+        return ResponseEntity.ok(response);
     }
 
     @GetMapping("/product/{productId}/verified")
-    public ResponseEntity<Page<ReviewResponse>> getVerifiedReviewsByProductId(
+    public ResponseEntity<ApiResponse<Page<ReviewResponse>>> getVerifiedReviewsByProductId(
             @PathVariable String productId,
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size) {
 
         Pageable pageable = PageRequest.of(page, size);
         Page<ReviewResponse> verifiedReviews = reviewService.getVerifiedReviewsByProductId(productId, pageable);
-        return ResponseEntity.ok(verifiedReviews);
+
+        ApiResponse<Page<ReviewResponse>> response = ApiResponse.success(
+                "Verified reviews retrieved successfully", verifiedReviews);
+        return ResponseEntity.ok(response);
     }
 }
 

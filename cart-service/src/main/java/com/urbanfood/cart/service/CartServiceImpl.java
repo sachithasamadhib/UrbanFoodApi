@@ -12,21 +12,40 @@ import com.urbanfood.cart.repository.CartRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
+import org.springframework.http.ResponseEntity;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
 import java.time.LocalDateTime;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
-@RequiredArgsConstructor
 @Slf4j
 public class CartServiceImpl implements CartService {
 
     private final CartRepository cartRepository;
     private final CartItemRepository cartItemRepository;
+    private final JdbcTemplate jdbcTemplate;
+    private final RestTemplate restTemplate;
+
+    @Autowired
+    public CartServiceImpl(
+            CartRepository cartRepository,
+            CartItemRepository cartItemRepository,
+            JdbcTemplate jdbcTemplate,
+            RestTemplate restTemplate) {
+        this.cartRepository = cartRepository;
+        this.cartItemRepository = cartItemRepository;
+        this.jdbcTemplate = jdbcTemplate;
+        this.restTemplate = restTemplate;
+    }
 
     @Override
     public CartResponseDTO getCartByUserId(Long userId) {
@@ -171,6 +190,9 @@ public class CartServiceImpl implements CartService {
             // Call Oracle stored procedure
             cartRepository.callRemoveFromCartProcedure(userId, productId);
 
+            // Send email notification
+            sendEmailNotification(userId, productId);
+
             // Return updated cart
             Cart updatedCart = cartRepository.findByUserId(userId)
                     .orElseThrow(() -> new CartException("Cart not found after removing item"));
@@ -212,6 +234,39 @@ public class CartServiceImpl implements CartService {
         }
     }
 
+    private void sendEmailNotification(Long userId, Long productId) {
+        try {
+            // Get user details
+            Map<String, Object> userDetails = jdbcTemplate.queryForMap(
+                    "SELECT email, firstname, lastname FROM user_accounts WHERE userid = ?",
+                    userId
+            );
+
+            // Create notification object
+            Map<String, Object> notification = new HashMap<>();
+            notification.put("user_id", userId);
+            notification.put("email", userDetails.get("email"));
+            notification.put("firstname", userDetails.get("firstname"));
+            notification.put("lastname", userDetails.get("lastname"));
+            notification.put("subject", "Item removed from your cart");
+            notification.put("notification_type", "CART_ITEM_REMOVED");
+            notification.put("product_id", productId);
+            notification.put("processed", 0);
+            notification.put("created_date", LocalDateTime.now().toString());
+
+            // Call email service
+            ResponseEntity<String> response = restTemplate.postForEntity(
+                    "http://email-service/api/email/send-notification",
+                    notification,
+                    String.class
+            );
+
+            log.info("Email notification sent: {}", response.getBody());
+        } catch (Exception e) {
+            log.error("Failed to send email notification", e);
+        }
+    }
+
     private CartDTO convertToCartDTO(Cart cart) {
         List<CartItem> cartItems = cartItemRepository.findByCartId(cart.getId());
 
@@ -239,7 +294,6 @@ public class CartServiceImpl implements CartService {
         dto.setAddedDate(cartItem.getAddedDate());
         dto.setSubtotal(dto.calculateSubtotal());
 
-        // In a real application, you would call the product service to get the product name
         dto.setProductName("Product " + cartItem.getProductId());
 
         return dto;
