@@ -250,7 +250,7 @@ public class CartServiceImpl implements CartService {
             notification.put("lastname", userDetails.get("lastname"));
             notification.put("subject", "Item removed from your cart");
             notification.put("notification_type", "CART_ITEM_REMOVED");
-            notification.put("product_id", productId);
+            notification.put("ProductID", productId);
             notification.put("processed", 0);
             notification.put("created_date", LocalDateTime.now().toString());
 

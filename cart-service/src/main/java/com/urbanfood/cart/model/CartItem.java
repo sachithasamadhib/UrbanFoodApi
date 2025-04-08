@@ -22,7 +22,7 @@ public class CartItem {
     @JoinColumn(name = "cart_id", nullable = false)
     private Cart cart;
 
-    @Column(name = "product_id", nullable = false)
+    @Column(name = "ProductID ", nullable = false)
     private Long productId;
 
     @Column(nullable = false)
