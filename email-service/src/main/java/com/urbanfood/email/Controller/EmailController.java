@@ -1,4 +1,4 @@
-package com.urbanfood.email.controller;
+package com.urbanfood.email.Controller;
 
 import com.urbanfood.email.model.EmailNotification;
 import com.urbanfood.email.service.EmailService;

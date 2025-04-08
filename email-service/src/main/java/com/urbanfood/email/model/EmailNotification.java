@@ -33,7 +33,7 @@ public class EmailNotification {
     @Column(name = "notification_type", nullable = false)
     private String notificationType;
 
-    @Column(name = "product_id")
+    @Column(name = "ProductID")
     private Long productId;
 
     @Column(name = "processed")
