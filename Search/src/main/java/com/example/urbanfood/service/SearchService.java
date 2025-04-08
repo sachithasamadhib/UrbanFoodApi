@@ -27,7 +27,7 @@ public class SearchService {
                 .withProcedureName("search_products")
                 .returningResultSet("PRODUCTCURSOR", (rs, rowNum) -> {
                     Search product = new Search();
-                    product.setName(rs.getString("NAME"));
+                    product.setName(rs.getString("ProductName"));
                     return product;
                 });
     }
