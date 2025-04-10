@@ -17,7 +17,7 @@ public class EmailNotification {
     @Column(name = "notification_id")
     private Long id;
 
-    @Column(name = "user_id", nullable = false)
+    @Column(name = "userid", nullable = false)
     private Long userId;
 
     @Column(nullable = false)
