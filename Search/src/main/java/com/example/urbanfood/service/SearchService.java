@@ -24,7 +24,7 @@ public class SearchService {
     public void setDataSource(DataSource dataSource) {
         // Updated to use the new enhanced search procedure
         this.searchProductsProc = new SimpleJdbcCall(dataSource)
-                .withProcedureName("search_products")
+                .withProcedureName("                                                                                      ")
                 .returningResultSet("PRODUCTCURSOR", (rs, rowNum) -> {
                     Search product = new Search();
                     product.setName(rs.getString("ProductName"));
